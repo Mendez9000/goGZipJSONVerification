@@ -4,6 +4,7 @@ import (
 	"github.com/goGZipJSONVerification/common"
 	"log"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -11,9 +12,14 @@ func main() {
 }
 
 func handlerPersonal(w http.ResponseWriter, r *http.Request) {
+	start := time.Now()
+
 	w.Header().Add("Content-Type", "application/json")
 	w.Header().Add("Accept-Charset", "utf-8")
 	w.Write([]byte(getJsonData()))
+
+	elapsed := time.Since(start)
+	log.Printf("Process took %s", elapsed)
 }
 
 func getJsonData() string {
